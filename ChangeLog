@@ -1,3 +1,12 @@
+2000-04-17  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/xgvis.R: Sleep a bit before unlinking all the files.
+	* R/xgobi.R: ditto.
+	Also, *all* the files are now unlinked. {-> "Fixme" removed}.
+	The tempfile name should also work when `matrx' is an expression
+	(and title unspecified).
+	Non-character title gives now an error.
+
 2000-04-12  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): New version is 1.1-9; ...

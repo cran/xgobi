@@ -14,12 +14,7 @@ function(dmat       = NULL,
   if (is.null(edges) && is.null(pos) && is.null(dmat))
     stop("One of dmat, edges, or pos must be present")
 
-  ##<KH>
-  ## tpath <- getenv("S_TMP")
-  ## if(nchar(tpath) == 0) tpath <- getenv("TEMP")
-  ## basefile <- paste(tpath, tempfile("xgvis"), sep = "/")
   basefile <- tempfile("xgvis")
-  ##</KH>
 
   ## distance matrix ###
   if (!is.null(dmat)) {
@@ -136,27 +131,20 @@ function(dmat       = NULL,
   }
 
 ## DEBUGGING: Keep all the tempfiles by
-  on.exit()
+##> on.exit()
 
 ### Note to installer:
 ### Here you need to specify the path to the xgvis executable / batch file
 ### on your system.
 
-  ## dos example:
-  ##  xgpath <- "c:/packages/xgobi/xgvis.bat"
-  ## unix example:
-  ##<KH>
-  ## xgpath <- "/usr/dfs/xgobi/joint/src/xgvis"
-  ## command <- paste(xgpath, basefile)
-  command <- paste("xgvis", basefile, "&")
-  ##</KH>
+  command <- paste("xgvis",  basefile, "&")
   cat(command, "\n")
   ## dos:
   ## invisible(dos(command, multi= F, minimized=T, output.to.S=F, translate=T))
-  ## unix:
-  ##<KH>
-  ## invisible(unix(command))
-  invisible(system(command, FALSE))
-  ##</KH>
+  s <- system(command, FALSE)
+
+  ## Now wait a bit before unlinking all the files via  on.exit(.) :
+  system("sleep 3")
+  invisible(s)
 }
 

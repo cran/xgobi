@@ -61,7 +61,7 @@ xgobi(matrx,
   }
   \item{title}{
     Optional character string which defines the \code{-title} argument used by
-    X. The default is the name (expression) of the current \code{matrx}
+    X. Defaults to the name (expression) of the current \code{matrx}
     argument.  See documentation for xgobi, or for X.
   }
   \item{vgroups}{

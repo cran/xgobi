@@ -4,13 +4,13 @@ function(matrx,
          rowlab     = dimnames(matrx)[[1]],
          colors     = NULL,
          glyphs     = NULL,
-         erase	     = NULL,
-         lines	     = NULL,
+         erase	    = NULL,
+         lines	    = NULL,
          linecolors = NULL,
          resources  = NULL,
-         title	     = deparse(substitute(matrx)),
+         title	    = deparse(substitute(matrx)),
          vgroups    = NULL,
-         std	     = "mmx",
+         std	    = "mmx",
          nlinkable  = NULL,
          subset     = NULL,
          display    = NULL)
@@ -22,10 +22,10 @@ function(matrx,
     if (any(is.infinite(x[!is.na(x)])))
 	stop("Sorry, xgobi can't handle Inf's")
 
-### Fixme: xgvis() uses about the same files,
-###        but makes sure that they are removed  on.exit(.) - should do the same
-
-    dfile <- tempfile(paste("xgobi",abbreviate(title,5),sep="-"))
+    if (!is.null(title) && !is.character(title))
+        stop("title must be a character string")
+    dfile <- tempfile(paste("xgobi", abbreviate(gsub("[^A-Za-z0-9]","",title),
+                                                5),sep="-"))
     write.table(x, file = dfile, quote = FALSE,
 		row.names = FALSE, col.names = FALSE)
     on.exit(unlink(dfile), add = TRUE)
@@ -54,13 +54,15 @@ function(matrx,
     if (!is.null(vgroups)) {
 	if (!is.vector(vgroups) || !is.numeric(vgroups))
 	    stop("The `vgroups' argument needs to be a numeric vector")
-	cat(vgroups, file = paste(dfile, ".vgroups", sep = ""), sep = "\n")
+	cat(vgroups, file=(vgfile <- paste(dfile,".vgroups",sep="")), sep="\n")
+        on.exit(unlink(vgfile), add = TRUE)
     }
     ## Colors ##
     if (!is.null(colors)) {
 	if (!is.vector(colors) || !is.character(colors))
 	    stop("The `colors' argument needs to be a character vector")
-	cat(colors, file = paste(dfile, ".colors", sep = ""), sep = "\n")
+	cat(colors, file = (clrfile <- paste(dfile,".colors",sep="")), sep="\n")
+        on.exit(unlink(clrfile), add = TRUE)
     }
     ## Glyphs ##
     if (!is.null(glyphs)) {
@@ -68,6 +70,7 @@ function(matrx,
 	    stop("The `glyphs' argument needs to be a numeric vector")
 	glyphfile <- paste(dfile, ".glyphs", sep = "")
 	cat(glyphs, file = glyphfile, sep = "\n")
+        on.exit(unlink(glyphfile), add = TRUE)
     }
     ## Erase ##
     if (!is.null(erase)) {
@@ -75,26 +78,27 @@ function(matrx,
 	    stop("The `erase' argument needs to be a numeric vector")
 	erasefile <- paste(dfile, ".erase", sep = "")
 	cat(erase, file = erasefile, sep = "\n")
+        on.exit(unlink(erasefile), add = TRUE)
     }
     ## Connected lines ##
     if (!is.null(lines)) {
 	if (!is.matrix(lines) || !is.numeric(lines) || dim(lines)[2] != 2)
 	    stop("The `lines' argument must be a numeric 2-column matrix")
 	linesfile <- paste(dfile, ".lines", sep = "")
-	##<KH>
-	## unix(paste("rm -f", linesfile), output = FALSE)
 	system(paste("rm -f", linesfile), FALSE)
-	##</KH>
 	if (nrow(lines) > 0) {
 	    for (i in 1:nrow(lines))
 		cat(lines[i, ], "\n", file = linesfile, append = TRUE)
 	}
+        on.exit(unlink(linesfile), add = TRUE)
+
 	## Line colors ##
 	if (!is.null(linecolors)) {
 	    if (!is.vector(linecolors) || !is.character(linecolors))
 		stop("The `linecolors' argument must be a character vector")
 	    linecolorfile <- paste(dfile, ".linecolors", sep = "")
 	    cat(linecolors, file = linecolorfile, sep = "\n")
+            on.exit(unlink(linecolorfile), add = TRUE)
 	}
     }
     ## Resources ##
@@ -103,6 +107,8 @@ function(matrx,
 	    stop("The `resources' argument must be a character vector")
 	resourcefile <- paste(dfile, ".resources", sep = "")
 	cat(resources, file = resourcefile, sep = "\n")
+        on.exit(unlink(resourcefile), add = TRUE)
+
     }
     ## nlinkable ##
     if (!is.null(nlinkable)) {
@@ -111,6 +117,7 @@ function(matrx,
 	    stop("The `nlinkable' argument must be a scalar integer")
 	linkablefile <- paste(dfile, ".nlinkable", sep = "")
 	cat(nlinkable, "\n", file = linkablefile)
+        on.exit(unlink(linkablefile), add = TRUE)
     }
     ## subset ##
     subsetarg <- ""
@@ -129,30 +136,21 @@ function(matrx,
 	    warning("display must be a character string")
 	else args <- paste("-display", display, args)
     }
-    if (!is.null(title)) {
-	if (!is.character(title)) {
-	    warning("title must be a character string")
-	    title <- deparse(substitute(matrx))
-	}
-    }
     args <- paste("-title", paste("'", title, "'", sep = ""), args)
-###
+
+## DEBUGGING: Keep all the tempfiles by
+##> on.exit()
+
 ### Note to installer:
 ### Here you will need to specify the path to the xgobi executable
-### on your system.
-    ##<KH>
-    ## path <- paste("/usr/dfs/xgobi/src/")
+### on your system (here we assume it *is* in the user's PATH :)
 
-    ## command <- paste(path, "xgobi", sep="")
-    ## command <- paste(command, args)
-    ## command <- paste(command, nrow(x), ncol(x),
-    ##	   search()[1], dfile, "&")
     command <- paste("xgobi", args, dfile, "&")
-    ##</KH>
-    cat(command, "\n")
 
-    ##<KH>
-    ## invisible(unix(command,output.to.S=F))
-    invisible(system(command, FALSE))
-    ##</KH>
+    cat(command, "\n")
+    s <- system(command, FALSE)
+
+    ## Now wait a bit before unlinking all the files via  on.exit(.) :
+    system("sleep 3")
+    invisible(s)
 }
