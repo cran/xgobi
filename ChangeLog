@@ -1,3 +1,20 @@
+2000-08-16  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): New version 1.2-1.
+	 Note that subversions >= 10 are not working with older versions
+	 of update.packages().
+
+	* Fixed all documentation (examples!) such that it completes
+	  R (1.2!)'s "R CMD check xgobi" without warnings.
+
+	* R/quadplot.R: quadplot() function (orig. from Jim Ramsay)
+	for "tetrahedral" display of 4-category proportions.
+
+	* data/PaulKAI.R: Corresponding data set.
+
+	* man/reggeom.Rd: New reggeom() function for regression teaching
+	by Hans Ehrbar.
+
 2000-04-17  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/xgvis.R: Sleep a bit before unlinking all the files.

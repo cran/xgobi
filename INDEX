@@ -1,5 +1,11 @@
-laser                    Bellcore Experimental Laser Data
-morsecodes               Rothkopf Morse Code Data
 xgobi                    XGobi: Dynamic Graphics for Data Analysis
 xgvis                    XGvis: Interactive Multidimensional Scaling
-                         Using XGobi for Display
+				Using XGobi for Display
+quadplot                 Tetrahedral Display for Four-Category
+				Proportions using XGobi
+reggeom                  Geometry of Regression with Two Regressors
+
+PaulKAI                  Occurences of ``kai'' in 10 Epistels of Apostel Paul
+laser                    Bellcore Experimental Laser Data
+morsecodes               Rothkopf Morse Code Data
+
