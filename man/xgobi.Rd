@@ -152,7 +152,7 @@ xgobi.colors.default
 data(laser)
 xgobi(laser)
 
-Xdir <- file.path(tempdir(), "xgobi")
+Xdir <- file.path(dirname(tempfile()), "xgobi")
 \testonly{if(file.exists(Xdir)) unlink(Xdir, recursive = TRUE)}
 dir.create(Xdir)
 xgobi(laser, colors = xgobi.colors.default[c(1,3,5,7,9,10)[as.factor(laser$ Ir)]],
