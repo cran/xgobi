@@ -89,11 +89,11 @@ The xgvis S function executes a call to the C program of the same name,
 and returns control of the S shell to the user.
 }
 \references{
-http://www.research.att.com/areas/stat/xgobi/
-http://www.public.iastate.edu/~dicook/
+  \url{http://www.research.att.com/areas/stat/xgobi/}, \cr
+  \url{http://www.public.iastate.edu/~dicook/}
 }
 \section{CONTACT}{
-D. F. Swayne dfs@research.att.com
+  D. F. Swayne \email{dfs@research.att.com}
 }
 \examples{
 ## The following examples use sample data files from the data_xgvis

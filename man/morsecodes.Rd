@@ -29,7 +29,7 @@
   }
 }
 \source{
-  Contained in the \file{data_xgvis} subdirectory of the XGobi and XGvis
+  Contained in the \file{data\_xgvis} subdirectory of the XGobi and XGvis
   source bundle, available via
   \url{http://www.research.att.com/areas/stat/xgobi/index.html#download}.
 }

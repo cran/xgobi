@@ -119,11 +119,11 @@ XGobi can be used to create vectors of brushing information and rotation
 coefficients; see the documentation for XGobi for details.
 }
 \references{
-http://www.research.att.com/areas/stat/xgobi/
-http://www.public.iastate.edu/~dicook/
+  \url{http://www.research.att.com/areas/stat/xgobi/}, \cr
+  \url{http://www.public.iastate.edu/~dicook/}
 }
 \section{CONTACT}{
-D. F. Swayne dfs@research.att.com
+  D. F. Swayne \email{dfs@research.att.com}
 }
 \examples{
 data(laser)

@@ -1,3 +1,12 @@
+Tue Jan  4 11:25:32 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-4.
+
+	* man/morsecodes.Rd: Fix Rd syntax problem.
+	
+	* man/xgobi.Rd: Mark up URLs and email addresses.
+	* man/xgvis.Rd: Mark up URLs and email addresses.
+
 Thu Dec 30 19:04:19 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 1.1-3.
