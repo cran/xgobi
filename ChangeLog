@@ -1,3 +1,19 @@
+Thu Dec 30 19:04:19 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-3.
+
+	* man/morsecodes.Rd: Add \alias for each morsecodes.* variable
+	contained in the data set.
+
+Tue Dec 28 19:28:50 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-2.
+
+	* man/morsecodes.Rd: New file.
+
+	* data/perm4.R: Removed (no `perm4.colors' in distribution).
+	* man/xgvis.Rd: Delete perm4 example.
+
 Sat Apr 10 16:32:51 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 1.1-1.

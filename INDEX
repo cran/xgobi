@@ -1,3 +1,5 @@
-xgobi                    Dynamic Graphics for Data Analysis
-xgvis                    Interactive Multidimensional Scaling Using xgobi
-                         for Display
+laser                    Bellcore Experimental Laser Data
+morsecodes               Rothkopf Morse Code Data
+xgobi                    XGobi: Dynamic Graphics for Data Analysis
+xgvis                    xgvis: interactive multidimensional scaling
+                         using xgobi for display

@@ -107,11 +107,6 @@ xgvis(dmat = morsecodes.dist,
       glyphs = morsecodes.glyphs,
       lines = morsecodes.lines,
       linecolors = morsecodes.linecolors)
-
-data(perm4)
-xgvis(edges = perm4.edges)
-xgvis(edges = perm4.edges,
-      linecolors = perm4.linecolors)
 }
 \keyword{dynamic}
 % Converted by Sd2Rd version 0.3-3.
