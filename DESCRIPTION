@@ -1,6 +1,6 @@
 Package: xgobi
-Version: 1.2-12
-Date: 2004-02-02
+Version: 1.2-13
+Date: 2005-01-22
 Title: Interface to the XGobi and XGvis programs for graphical data analysis
 Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
 Author: Martin Maechler,
@@ -17,3 +17,4 @@ License: Copyright (C) by Bellcore, non-profit use and redistribution
 	permitted (see COPYING for details)
 NOTE: XGobi and XGVis have been superseded by ggobi and ggvis, available
       from www.ggobi.org.  The R package R(S)ggobi can also be obtained there.
+Packaged: Sat Jan 22 14:17:02 2005; maechler

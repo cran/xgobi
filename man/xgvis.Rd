@@ -21,7 +21,6 @@ xgvis(dmat = NULL,
       resources = NULL, display = NULL,
       multi = TRUE,
       keep = FALSE, fprefix = "xgvis-")
-)
 }
 \arguments{
   \item{dmat}{numeric \eqn{n \times n}{n * n} distance matrix.}
