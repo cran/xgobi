@@ -1,3 +1,4 @@
+
 xgobi <- function(matrx,
                   collab     = dimnames(matrx)[[2]],
                   rowlab     = dimnames(matrx)[[1]],
@@ -10,7 +11,6 @@ xgobi <- function(matrx,
                   title      = NULL,
                   vgroups    = NULL,
                   std        = "mmx",
-                  dev        = 2.0,
                   nlinkable  = NULL,
                   subset     = NULL,
                   display    = NULL)
@@ -25,19 +25,13 @@ xgobi <- function(matrx,
           return()
         }
         dfile <- tempfile("unix")
-        ##KH cat(t(x), file = dfile, fill = 80)
+        ##<KH>
+        ## cat(t(x), file = dfile, fill = 80)
         write.table(x, file = dfile, quote = FALSE,
                     row.names = FALSE, col.names = FALSE)
+        ##</KH>
 
-        ### Missing values, if present ###
-        #if (sum(is.na(x)) > 0) {
-        #  x.missing <- is.na(x)
-        #  x.missing[x.missing == FALSE] <- 0
-        #  x.missing[x.missing == TRUE] <- 1
-        #  missingfile <- paste(dfile, ".missing", sep="")
-        #  cat(t(x.missing), file = missingfile, fill = 80)
-        #}
-        ### Use the C code to do this ###
+        args <- ""
 
         ### Column labels ###
         if (missing(collab))
@@ -125,7 +119,10 @@ xgobi <- function(matrx,
             }
 
             linesfile <- paste(dfile, ".lines", sep="")
-            unix(paste("rm -f", linesfile), output=F)
+            ##<KH>
+            ## unix(paste("rm -f", linesfile), output=F)
+            system(paste("rm -f", linesfile), FALSE)
+            ##</KH>
             if (nrow(lines) > 0) {
                 for (i in 1:nrow(lines))
                     cat(lines[i,], "\n", file = linesfile, append=T)
@@ -177,12 +174,8 @@ xgobi <- function(matrx,
                 return()
             }
             subsetarg <- paste(" -subset ", subset, sep="")
-        }
-
-        ##KH args <- paste("-s -std", std, "-dev", dev)
-        args <- paste("-std", std, "-dev", dev)
-        if (subsetarg != "")
             args <- paste(args, subsetarg, sep=" ")
+        }
 
         if (!missing(display)) {
             if (!is.character(display))
@@ -205,17 +198,21 @@ xgobi <- function(matrx,
 # Note to installer:
 # Here you will need to specify the path to the xgobi executable
 # on your system.
-        ##KH path <- paste("/usr/dfs/xgobi/src/")
+        ##<KH>
+        ## path <- paste("/usr/dfs/xgobi/src/")
 #
-        ##KH command <- paste(path, "xgobi", sep="")
-        ##KH command <- paste(command, args)
-        ##KH command <- paste(command, nrow(x), ncol(x),
-        ##KH     search()[1], dfile, "&")
-        command <- paste("xgobi", args, dfile, "&")
+        ## command <- paste(path, "xgobi", sep="")
+        ## command <- paste(command, args)
+        ## command <- paste(command, nrow(x), ncol(x),
+        ##     search()[1], dfile, "&")
+        command <- paste("xgobi", args, dfile, "&")        
+        ##</KH>
         cat(command, "\n")
 
-        ##KH invisible(unix(command,output.to.S=F))
+        ##<KH>
+        ## invisible(unix(command,output.to.S=F))
         invisible(system(command, FALSE))
+        ##</KH>
     }
     else
       cat("Matrix argument required\n")

@@ -15,7 +15,7 @@ collab=NULL, rowlab=NULL,
 colors=NULL, glyphs=NULL, erase=NULL,
 lines=NULL, linecolors=NULL,
 resources=NULL, title=NULL,
-vgroups=NULL, std="mmx", dev=2.0,
+vgroups=NULL, std="mmx",
 nlinkable=0, subset=NULL,
 display=NULL)
 }
@@ -79,9 +79,8 @@ Optional string; which standardization of view to use.  Default is
 \code{"mmx"}, minimum-maximum scaling, in which the view is centered at the
 midpoint of the data, and all the data fits inside the plotting
 window.  Alternatives are \code{"msd"}, in which the plot is centered at the
-mean of the data and \code{dev} standard deviations fit inside the plotting
-region, or \code{"mmd"} in which the plot is centered at the median and \code{dev}
-median absolute deviations are shown inside the plotting window.
+mean of the data, or \code{"mmd"} in which the plot is centered at the median.
+In those two cases, the view is standardized using the largest distance.
 }
 \item{dev}{
 Optional numeric scalar; the number of standard deviations (if \code{"msd"}

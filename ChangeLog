@@ -1,3 +1,12 @@
+Sun Jan 23 16:19:56 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-5.
+
+	* R/xgobi.R: Sync with the version in xgobi 1999/Nov.  Fix bug
+	reported by Hans Ehrbar <ehrbar@econ.utah.edu>.
+	
+	* R/xgvis.R: Sync with the version in xgobi 1999/Nov.
+
 Tue Jan  4 11:25:32 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 1.1-4.

@@ -1,3 +1,4 @@
+
 xgvis <-
   function(dmat       = NULL,
            edges      = NULL,
@@ -11,18 +12,17 @@ xgvis <-
            resources  = NULL,
            display    = NULL)
 {
-  ##KH
-  FILES <- NULL
-    
   if (missing(edges) && missing(pos) && missing(dmat)) {
     cat("One of dmat, edges, or pos must be present\n")
     return()
   }
 
-  ##KH tpath <- getenv("S_TMP")
-  ##KH if(nchar(tpath) == 0) tpath <- getenv("TEMP")
-  ##KH basefile <- paste(tpath, tempfile("xgvis"), sep = "/")
+  ##<KH>
+  ## tpath <- getenv("S_TMP")
+  ## if(nchar(tpath) == 0) tpath <- getenv("TEMP")
+  ## basefile <- paste(tpath, tempfile("xgvis"), sep = "/")
   basefile <- tempfile("xgvis")
+  ##</KH>
 
   ### distance matrix ###
   if (!missing(dmat)) {
@@ -33,9 +33,7 @@ xgvis <-
     }
     dfile <- paste(basefile, ".dist", sep="")
     write(t(dmat), file = dfile, ncolumns = ncol(dmat))
-    ##KH on.exit(unlink(dfile), add=T)
-    FILES <- c(FILES, dfile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(dfile), add=T)
   }
 
   ### Edges ###
@@ -43,7 +41,7 @@ xgvis <-
     {
       # check data type
       if (!is.matrix(edges) || !is.numeric(edges) || dim(edges)[2] != 2) {
-        cat("The `edges' argument must be a numeric 2-column matrix\n")
+        cat("The 'edges' argument must be a numeric 2-column matrix\n")
         return()
       }
 
@@ -51,9 +49,7 @@ xgvis <-
       if (nrow(edges) > 0) {
 	write(t(edges), file = edgesfile, ncol=2)
       }
-      ##KH on.exit(unlink(edgesfile), add=T)
-      FILES <- c(FILES, edgesfile)
-      on.exit(unlink(FILES))      
+      on.exit(unlink(edgesfile), add=T)
     }
 
   ### position matrix ###
@@ -66,82 +62,70 @@ xgvis <-
       }
     pfile <- paste(basefile, ".pos", sep="")
     write(t(pos), file = pfile, ncolumns = ncol(pos))
-    ##KH on.exit(unlink(pfile), add = T)
-    FILES <- c(FILES, pfile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(pfile), add = T)
   }
 
   ### Row labels ###
   if (!missing(rowlab))
     # check data type
     if (!is.vector(rowlab) || !is.character(rowlab)) {
-      cat("The `rowlab' argument needs to be a character vector\n")
+      cat("The 'rowlab' argument needs to be a character vector\n")
       return()
     }
   if (length(rowlab) > 0) {
     rowfile <- paste(basefile, ".row", sep="")
     write(rowlab, file = rowfile, ncol=1)
-    ##KH on.exit(unlink(rowfile), add = T)
-    FILES <- c(FILES, rowfile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(rowfile), add = T)
   }
 
   ### Colors ###
   if (!missing(colors)) {
     # check data type
     if (!is.vector(colors) || !is.character(colors)) {
-      cat("The `colors' argument needs to be a character vector\n")
+      cat("The 'colors' argument needs to be a character vector\n")
       return()
     }
     colorfile <- paste(basefile, ".colors", sep="")
     write(colors, file = colorfile, ncol=1)
-    ##KH on.exit(unlink(colorfile), add = T)
-    FILES <- c(FILES, colorfile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(colorfile), add = T)
   }
   
   ### Glyphs ###
   if (!missing(glyphs)) {
     # check data type
     if (!is.vector(glyphs) || !is.numeric(glyphs)) {
-      cat("The `glyphs' argument needs to be a numeric vector\n")
+      cat("The 'glyphs' argument needs to be a numeric vector\n")
       return()
     }
     glyphfile <- paste(basefile, ".glyphs", sep="")
     write(glyphs, file = glyphfile, ncol=1)
-    ##KH on.exit(unlink(glyphfile), add = T)
-    FILES <- c(FILES, glyphfile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(glyphfile), add = T)
   }
   
   ### Erase ###
   if (!missing(erase)) {
     # check data type
     if (!is.vector(erase) || !is.numeric(erase)) {
-      cat("The `erase' argument needs to be a numeric vector\n")
+      cat("The 'erase' argument needs to be a numeric vector\n")
       return()
     }
     erasefile <- paste(basefile, ".erase", sep="")
     write(erase, file = erasefile, ncol=1)
-    ##KH on.exit(unlink(erasefile), add = T)
-    FILES <- c(FILES, erasefile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(erasefile), add = T)
   }
 
   ### Connected lines ###
   if (!missing(lines)) {
     # check data type
     if (!is.matrix(lines) || !is.numeric(lines) || dim(lines)[2] != 2) {
-      cat("The `lines' argument must be a numeric 2-column matrix\n")
+      cat("The 'lines' argument must be a numeric 2-column matrix\n")
       return()
     }
 
     linesfile <- paste(basefile, ".lines", sep="")
     if (nrow(lines) > 0) {
       write(t(lines), file = linesfile, ncol=2)
-      ##KH on.exit(unlink(linesfile), add = T)
-      FILES <- c(FILES, linesfile)
-      on.exit(unlink(FILES))
+      on.exit(unlink(linesfile), add = T)
     }
   }
 
@@ -149,28 +133,24 @@ xgvis <-
   if ((!missing(lines) || !missing(edges)) && !missing(linecolors)) {
     # check data type
     if (!is.vector(linecolors) || !is.character(linecolors)) {
-      cat("The `linecolors' argument must be a character vector\n")
+      cat("The 'linecolors' argument must be a character vector\n")
       return()
     }
     linecolorfile <- paste(basefile, ".linecolors", sep="")
     write(linecolors, file = linecolorfile, ncol=1)
-    ##KH on.exit(unlink(linecolorfile), add = T)
-    FILES <- c(FILES, linecolorfile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(linecolorfile), add = T)
   }
 
   ### Resources ###
   if (!missing(resources)) {
     # check data type
     if (!is.vector(resources) || !is.character(resources)) {
-      cat("The `resources' argument must be a character vector\n")
+      cat("The 'resources' argument must be a character vector\n")
       return()
     }
     resourcefile <- paste(basefile, ".resources", sep="")
     write(resources, file = resourcefile, ncol=1)
-    ##KH on.exit(unlink(resourcefile), add = T)
-    FILES <- c(FILES, resourcefile)
-    on.exit(unlink(FILES))
+    on.exit(unlink(resourcefile), add = T)
   }
 
 
@@ -179,16 +159,20 @@ xgvis <-
   # on your system.
   #
   # dos example:
-  #  xgpath <- "c:/packages/xgobi/xgvis.bat"
+#  xgpath <- "c:/packages/xgobi/xgvis.bat"
   # unix example:
-  ##KH xgpath <- "/usr/dfs/xgobi/joint/src/xgvis"
-  ##KH command <- paste(xgpath, basefile)
+  ##<KH>
+  ## xgpath <- "/usr/dfs/xgobi/joint/src/xgvis"
+  ## command <- paste(xgpath, basefile)
   command <- paste("xgvis", basefile)
+  ##</KH>
   cat(command, "\n")
   # dos:
-  #  invisible(dos(command, multi = F, minimized = T,
-  #     output.to.S = F, translate = T))
+#  invisible(dos(command, multi = F, minimized = T, output.to.S = F, translate = T))
   # unix:
-  ##KH invisible(unix(command))
+  ##<KH>
+  ## invisible(unix(command))
   invisible(system(command))
+  ##</KH>
 }
+
