@@ -1,13 +1,12 @@
 \name{xgobi}
+\title{XGobi: Dynamic Graphics for Data Analysis}
 \alias{xgobi}
 \alias{xgobi.colors.default}
-
-\title{XGobi: Dynamic Graphics for Data Analysis}
 \description{
-Dynamic graphics, including  brushing, rotation, grand tour, projection
-pursuit, slicing.  Most effectively used when called more than once on same
-data, which then allows linked plots.  Brushing with several glyphs and
-colors is supported.  (On monochrome displays, only glyphs can be used.)
+  Dynamic graphics, including  brushing, rotation, grand tour, projection
+  pursuit, slicing.  Most effectively used when called more than once on same
+  data, which then allows linked plots.  Brushing with several glyphs and
+  colors is supported.  (On monochrome displays, only glyphs can be used.)
 }
 \usage{
 xgobi(matrx,
@@ -19,7 +18,6 @@ xgobi(matrx,
       vgroups = NULL, std = "mmx",
       nlinkable = NULL, subset = NULL, display = NULL,
       keep = FALSE, fprefix = "xgobi-")
-)
 
 xgobi.colors.default
 }

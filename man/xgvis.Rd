@@ -44,8 +44,8 @@ xgvis(dmat = NULL,
     character vector of \code{n} row labels (defaulting to those of
     \code{dmat}); if no default exists, \code{\link{xgobi}} constructs
     its own (numbers \code{1:n}).}
-  \item{colors}{optional character vector suppling initial point colors to be used;
-    see \code{\link{xgobi}}.}
+  \item{colors}{optional character vector supplying initial point colors
+    to be used; see \code{\link{xgobi}}.}
   \item{glyphs}{integer vector, used to supply glyphs to be used on
     startup, see \code{\link{xgobi}}.}
   }
