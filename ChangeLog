@@ -1,3 +1,9 @@
+2004-01-28  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.2-11 -> CRAN
+
+	* R/reggeom.R (reggeom): change code (no-op!) to match doc
+
 2003-09-15  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Date): and submit to CRAN

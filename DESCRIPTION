@@ -1,6 +1,6 @@
 Package: xgobi
-Version: 1.2-10
-Date: 2003-09-15
+Version: 1.2-11
+Date: 2004-01-28
 Title: Interface to the XGobi and XGvis programs for graphical data analysis
 Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
 Author: Martin Maechler,
