@@ -1,19 +1,28 @@
+## These should really match the *brushColor[0-9]  `fallback resources' in
+##  XGOBISRC/src/xgobitop.h :
+## [these are ok for the "Dec. 1999" version of xgobi]:
+xgobi.colors.default <-
+  c("DeepPink", "OrangeRed1", "DarkOrange", "Gold", "Yellow",
+    "DeepSkyBlue1", "SlateBlue1", "YellowGreen", "MediumSpringGreen", "MediumOrchid")
+
 xgobi <-
 function(matrx,
-         collab     = dimnames(matrx)[[2]],
-         rowlab     = dimnames(matrx)[[1]],
-         colors     = NULL,
-         glyphs     = NULL,
-         erase	    = NULL,
-         lines	    = NULL,
-         linecolors = NULL,
-         resources  = NULL,
-         title	    = deparse(substitute(matrx)),
-         vgroups    = NULL,
-         std	    = "mmx",
-         nlinkable  = NULL,
-         subset     = NULL,
-         display    = NULL)
+	 collab = dimnames(matrx)[[2]],
+	 rowlab = dimnames(matrx)[[1]],
+	 colors = NULL,
+	 glyphs = NULL,
+	 erase	= NULL,
+	 lines	= NULL,
+	 linecolors = NULL,
+	 resources  = NULL,
+	 title	= deparse(substitute(matrx)),
+	 vgroups= NULL,
+	 std	= "mmx",
+	 nlinkable  = NULL,
+	 subset = NULL,
+	 display= NULL,
+	 keep	= FALSE,
+	 fprefix= "xgobi-")
 {
     x <- if(is.expression(matrx) || is.character(matrx))
 	eval(matrx) else matrx
@@ -24,11 +33,12 @@ function(matrx,
 
     if (!is.null(title) && !is.character(title))
         stop("title must be a character string")
-    dfile <- tempfile(paste("xgobi", abbreviate(gsub("[^A-Za-z0-9]","",title),
-                                                5),sep="-"))
+    dfile <- tempfile(paste(fprefix,
+                            abbreviate(gsub("[^A-Za-z0-9]","",title), 5),
+                            sep=""))
     write.table(x, file = dfile, quote = FALSE,
 		row.names = FALSE, col.names = FALSE)
-    on.exit(unlink(dfile), add = TRUE)
+    if(!keep) on.exit(unlink(dfile), add = TRUE)
 
     args <- paste("-std", std) ##, "-dev", dev)
 
@@ -38,8 +48,9 @@ function(matrx,
 	    stop("The `collab' argument needs to be a character vector")
 	if (!missing(collab) && length(collab) != NCOL(x))
 	    stop("`collab' has wrong length (not matching NCOL(x))")
-        cat(collab, file = (colfile <- paste(dfile, ".col", sep="")), sep= "\n")
-        on.exit(unlink(colfile), add = TRUE)
+        cat(collab, file = (colfile <- paste(dfile, ".col", sep="")), sep=
+"\n")
+        if(!keep) on.exit(unlink(colfile), add = TRUE)
     }
     ## Row / Case labels ###
     if (!is.null(rowlab)) {
@@ -48,21 +59,21 @@ function(matrx,
 	if (!missing(rowlab) && length(rowlab) != NROW(x))
 	    stop("`rowlab' has wrong length (not matching NROW(x))")
         cat(rowlab, file = (rowfile <- paste(dfile, ".row", sep="")), sep="\n")
-        on.exit(unlink(rowfile), add = TRUE)
+        if(!keep) on.exit(unlink(rowfile), add = TRUE)
     }
     ## Variable groups ##
     if (!is.null(vgroups)) {
-	if (!is.vector(vgroups) || !is.numeric(vgroups))
-	    stop("The `vgroups' argument needs to be a numeric vector")
-	cat(vgroups, file=(vgfile <- paste(dfile,".vgroups",sep="")), sep="\n")
-        on.exit(unlink(vgfile), add = TRUE)
+	   if (!is.vector(vgroups) || !is.numeric(vgroups))
+	       stop("The `vgroups' argument needs to be a numeric vector")
+	   cat(vgroups, file=(vgfile <- paste(dfile,".vgroups",sep="")), sep="\n")
+           if(!keep) on.exit(unlink(vgfile), add = TRUE)
     }
     ## Colors ##
     if (!is.null(colors)) {
 	if (!is.vector(colors) || !is.character(colors))
 	    stop("The `colors' argument needs to be a character vector")
 	cat(colors, file = (clrfile <- paste(dfile,".colors",sep="")), sep="\n")
-        on.exit(unlink(clrfile), add = TRUE)
+        if(!keep) on.exit(unlink(clrfile), add = TRUE)
     }
     ## Glyphs ##
     if (!is.null(glyphs)) {
@@ -70,7 +81,7 @@ function(matrx,
 	    stop("The `glyphs' argument needs to be a numeric vector")
 	glyphfile <- paste(dfile, ".glyphs", sep = "")
 	cat(glyphs, file = glyphfile, sep = "\n")
-        on.exit(unlink(glyphfile), add = TRUE)
+        if(!keep) on.exit(unlink(glyphfile), add = TRUE)
     }
     ## Erase ##
     if (!is.null(erase)) {
@@ -78,7 +89,7 @@ function(matrx,
 	    stop("The `erase' argument needs to be a numeric vector")
 	erasefile <- paste(dfile, ".erase", sep = "")
 	cat(erase, file = erasefile, sep = "\n")
-        on.exit(unlink(erasefile), add = TRUE)
+        if(!keep) on.exit(unlink(erasefile), add = TRUE)
     }
     ## Connected lines ##
     if (!is.null(lines)) {
@@ -90,7 +101,7 @@ function(matrx,
 	    for (i in 1:nrow(lines))
 		cat(lines[i, ], "\n", file = linesfile, append = TRUE)
 	}
-        on.exit(unlink(linesfile), add = TRUE)
+        if(!keep) on.exit(unlink(linesfile), add = TRUE)
 
 	## Line colors ##
 	if (!is.null(linecolors)) {
@@ -98,7 +109,8 @@ function(matrx,
 		stop("The `linecolors' argument must be a character vector")
 	    linecolorfile <- paste(dfile, ".linecolors", sep = "")
 	    cat(linecolors, file = linecolorfile, sep = "\n")
-            on.exit(unlink(linecolorfile), add = TRUE)
+
+            if(!keep) on.exit(unlink(linecolorfile), add = TRUE)
 	}
     }
     ## Resources ##
@@ -107,8 +119,7 @@ function(matrx,
 	    stop("The `resources' argument must be a character vector")
 	resourcefile <- paste(dfile, ".resources", sep = "")
 	cat(resources, file = resourcefile, sep = "\n")
-        on.exit(unlink(resourcefile), add = TRUE)
-
+        if(!keep) on.exit(unlink(resourcefile), add = TRUE)
     }
     ## nlinkable ##
     if (!is.null(nlinkable)) {
@@ -117,7 +128,7 @@ function(matrx,
 	    stop("The `nlinkable' argument must be a scalar integer")
 	linkablefile <- paste(dfile, ".nlinkable", sep = "")
 	cat(nlinkable, "\n", file = linkablefile)
-        on.exit(unlink(linkablefile), add = TRUE)
+        if(!keep) on.exit(unlink(linkablefile), add = TRUE)
     }
     ## subset ##
     subsetarg <- ""
@@ -138,9 +149,6 @@ function(matrx,
     }
     args <- paste("-title", paste("'", title, "'", sep = ""), args)
 
-## DEBUGGING: Keep all the tempfiles by
-##> on.exit()
-
 ### Note to installer:
 ### Here you will need to specify the path to the xgobi executable
 ### on your system (here we assume it *is* in the user's PATH :)
@@ -151,6 +159,6 @@ function(matrx,
     s <- system(command, FALSE)
 
     ## Now wait a bit before unlinking all the files via  on.exit(.) :
-    system("sleep 3")
+    if(!keep) system("sleep 3")
     invisible(s)
 }

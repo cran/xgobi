@@ -18,7 +18,9 @@ xgvis(dmat = NULL,
       rowlab = dimnames(dmat)[[1]],
       colors = NULL, glyphs = NULL,
       erase = NULL, lines = NULL, linecolors = NULL,
-      resources = NULL, display = NULL)
+      resources = NULL, display = NULL,
+      keep = FALSE, fprefix = "xgvis-")
+)
 }
 \arguments{
   \item{dmat}{numeric \eqn{n \times n}{n * n} distance matrix.}
@@ -42,12 +44,10 @@ xgvis(dmat = NULL,
     character vector of \code{n} row labels (defaulting to those of
     \code{dmat}); if no default exists, \code{\link{xgobi}} constructs
     its own (numbers \code{1:n}).}
-  \item{colors}{
-    Optional character vector, used to supply initial point colors to be used;
-    the default is that all points are the same color.}
-  \item{glyphs}{
-    Optional integer vector, used to supply glyphs to be used on
-    startup; the default is that all points are drawn with the same glyph.
+  \item{colors}{optional character vector suppling initial point colors to be used;
+    see \code{\link{xgobi}}.}
+  \item{glyphs}{integer vector, used to supply glyphs to be used on
+    startup, see \code{\link{xgobi}}.}
   }
   \item{erase}{
     Optional integer vector of length equal to the number of rows in the
@@ -69,7 +69,7 @@ xgvis(dmat = NULL,
   \item{resources}{
     Optional character vector created by clicking on the ``Save
     Resources'' button in XGobi.
-    %(if this XGvis was initiated during an S session).
+    %(if this XGvis was initiated during an R session).
   }
   \item{display}{
     Optional character string, identifying the monitor on which to display
@@ -77,6 +77,10 @@ xgvis(dmat = NULL,
     \code{machine} is the name of the user's workstation.  See
     documentation for X.
   }
+  \item{keep}{logical, indicating if the temporary files should be kept
+    (e.g. for calling the \code{xgobi} program outside \R)}
+  \item{fprefix}{character string for the \bold{f}ile name \bold{prefix}
+    to be used for temporary files.}
 }
 \value{
   The UNIX \code{status} upon completion, i.e. \code{0} if ok.
@@ -119,11 +123,16 @@ xgvis(dmat = morsecodes.dist,
 ##>      control the rotation direction by dragging the mouse on the plot.
 ##>   9) You can check out the initial configuration by
 
+## In order to have no color warning :
+Mcolors <- unique(morsecodes.colors)
+(Mcolors <- paste("*brushColor", 0:(length(Mcolors)-1),": ", Mcolors, sep=""))
+
 xgobi(morsecodes.pos, collab = morsecodes.col, rowlab = mc.row,
       colors = morsecodes.colors,
       glyphs = morsecodes.glyphs,
       lines  = morsecodes.lines,
-      linecolors = morsecodes.linecolors)## add "Lines" via [Display] menu
+      linecolors = morsecodes.linecolors,
+      resources= c("*showLines: True", Mcolors))
 
 ##>      This XGobi window will be linked with
 ##>      the XGvis window for glyph-color brushing and labeling.

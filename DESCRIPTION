@@ -1,5 +1,5 @@
 Package: xgobi
-Version: 1.2-1
+Version: 1.2-2
 Author: Martin Maechler <maechler@stat.math.ethz.ch>,
 	originally packaged for R by Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>,
 	based on the S code in the XGobi distribution.

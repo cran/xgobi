@@ -1,8 +1,8 @@
 \name{xgobi}
 \alias{xgobi}
-\title{
-XGobi: Dynamic Graphics for Data Analysis
-}
+\alias{xgobi.colors.default}
+
+\title{XGobi: Dynamic Graphics for Data Analysis}
 \description{
 Dynamic graphics, including  brushing, rotation, grand tour, projection
 pursuit, slicing.  Most effectively used when called more than once on same
@@ -14,12 +14,14 @@ xgobi(matrx,
       collab = dimnames(matrx)[[2]],
       rowlab = dimnames(matrx)[[1]],
       colors = NULL, glyphs = NULL, erase = NULL,
-      lines = NULL, linecolors = NULL,
-      resources = NULL,
+      lines = NULL, linecolors = NULL, resources = NULL,
       title = deparse(substitute(matrx)),
       vgroups = NULL, std = "mmx",
-      nlinkable = NULL, subset = NULL,
-      display = NULL)
+      nlinkable = NULL, subset = NULL, display = NULL,
+      keep = FALSE, fprefix = "xgobi-")
+)
+
+xgobi.colors.default
 }
 \arguments{
   \item{matrx}{numeric \code{n * p} matrix or data.frame.}
@@ -33,10 +35,16 @@ xgobi(matrx,
     its own (numbers \code{1:n}).}
   \item{colors}{
     Optional character vector, used to supply initial point colors to be used;
-    the default is that all points are the same color.}
+    the default is that all points are the same color.  Details, see below.}
   \item{glyphs}{
     Optional integer vector, used to supply glyphs to be used on
-    startup; the default is that all points are drawn with the same glyph.}
+    startup; the default is that all points are drawn with the same
+    glyph.
+
+    Glyphs have been coming as six different types (plus, X, open and
+    filled rectangle, open and filled circle) in five different sizes,
+    plus ``point'', giving 31 available glyphs.
+  }
   \item{erase}{
     Optional integer vector of length equal to the number of rows in the
     data and composed of 1s and 0s.  A 1 in position i specifies that
@@ -102,6 +110,10 @@ xgobi(matrx,
     the xgobi window.  The default is \code{"machine:0.0"} where
     \code{machine} is the name of the user's workstation.  See
     documentation for xgobi or for X.}
+  \item{keep}{logical, indicating if the temporary files should be kept
+    (e.g. for calling the \code{xgobi} program outside \R)}
+  \item{fprefix}{character string for the \bold{f}ile name \bold{prefix}
+    to be used for temporary files.}
 }
 \value{
   The UNIX \code{status} upon completion, i.e. \code{0} if ok.
@@ -115,22 +127,43 @@ xgobi(matrx,
   XGobi can be used to create vectors of brushing information and rotation
   coefficients; see the documentation for XGobi for details.
 }
+\details{
+  \code{xgobi.colors.default} is the vector of the ten default brush
+  colors from which to choose by the \code{colors} argument.
+
+  Note that this sef of default brush colors can be modified by a (site or
+  user) specific \file{app-defaults} file, or directly by
+  \code{xgobi(*, resources = ..)}, redefining (\code{*brushColor}\eqn{n}
+  (with \eqn{n} from \code{0:9}).
+
+  A warning is issued if \code{colors} contains strings not in the
+  \code{brushColor} resources.
+}
 \references{
   \url{http://www.research.att.com/areas/stat/xgobi/}, \cr
   \url{http://www.public.iastate.edu/~dicook/}
 }
 \author{of \R port: Kurt Hornik and
   Martin Maechler \email{maechler@stat.math.ethz.ch}}
-\section{CONTACT}{
+\section{CONTACT}{(xgobi main program):
   D. F. Swayne \email{dfs@research.att.com}
 }
-\seealso{\code{\link{xgvis}} which uses \code{xgobi} for interactive MDS.}
+\seealso{\code{\link{xgvis}} which uses \code{xgobi} for interactive MDS.
+}
 \examples{
 data(laser)
 xgobi(laser)
 
-## see also help(xgvis)
+system("mkdir /tmp/xgobi")
+xgobi(laser, colors = xgobi.colors.default[c(1,3,5,7,9,10)[as.factor(laser$ Ir)]],
+      glyphs = c(23,8)[1+(laser$lambda > 1576)],
+      keep = TRUE, fprefix="xgobi/L-")
+system("ls -l /tmp/xgobi")# >> Files "L-laser..."
+## remove manually when finally unused:
+system("rm /tmp/xgobi/L-*")
+
+##>>> see also the morsecodes example in  help(xgvis) <<<
+##                 ------------------     -----------
 }
 \keyword{dynamic}
 \keyword{multivariate}
-

@@ -1,3 +1,19 @@
+2000-09-04  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.2-2
+
+	* man/xgobi.Rd: Improved documentation about glyphs and colors.
+	* man/xgvis.Rd: xgobi() example with resources
+
+	* R/xgobi.R: new variable  "xgobi.colors.default".
+
+2000-09-01  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/xgobi.R: new "keep = FALSE" and "fprefix" arguments
+		suggested by Harry Mangalam, for keeping "temporary" files,
+		named with a prefix.
+	* R/xgvis.R: the same
+
 2000-08-16  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): New version 1.2-1.
