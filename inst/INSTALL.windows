@@ -1,0 +1,14 @@
+Xgobi for Windows can be obtained from
+
+	http://www.stats.ox.ac.uk/pub/SWin
+
+Install and test this first.
+
+
+You will need to customize the batch files in the scripts directory
+for your installation.  The example files there work for mine.
+
+You might want to set the properties of the batch files under Win 9x
+to `Close on exit' after you have them working.
+
+

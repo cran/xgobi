@@ -2,16 +2,18 @@ Note that this R package is just an interface
 	R <--> xgobi
 	R <--> xgvis
 to the two (related) programs xgobi and xgvis.
+These standalone programs are no longer developed,
+while their authors rather focus on the more flexible and modern
+`GGobi' and its tools, see  http://www.ggobi.org/
+with its own R package	    --------------------- Rggobi.
 
 You must install these independently and can get them via
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	http://www.research.att.com/areas/stat/xgobi/
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+or the Windows port as described in the file INSTALL.windows (in the
+inst directory in the sources).
 
-Note that within the next several months,
-xgobi (& xgvis) will be replaced by the more flexible and modern
-`GGobi' and its tools, see  http://www.ggobi.org/
-			    ---------------------
 June 2001,
 Martin Maechler <maechler@stat.math.ethz.ch>	http://stat.ethz.ch/~maechler/
 Seminar fuer Statistik, ETH-Zentrum  LEO D10	Leonhardstr. 27

@@ -15,10 +15,11 @@
 xgvis(dmat = NULL,
       edges= NULL,
       pos  = NULL,
-      rowlab = dimnames(dmat)[[1]],
+      rowlab = colnames(dmat),
       colors = NULL, glyphs = NULL,
       erase = NULL, lines = NULL, linecolors = NULL,
       resources = NULL, display = NULL,
+      multi = TRUE,
       keep = FALSE, fprefix = "xgvis-")
 )
 }
@@ -75,6 +76,9 @@ xgvis(dmat = NULL,
     \code{machine} is the name of the user's workstation.  See
     documentation for X.
   }
+  \item{multi}{logical, indicating if the \code{xgobi} process should be
+    run multi-tasking with \R.  If true, control returns to the R
+    command prompt after 3 seconds.}
   \item{keep}{logical, indicating if the temporary files should be kept
     (e.g. for calling the \code{xgobi} program outside \R)}
   \item{fprefix}{character string for the \bold{f}ile name \bold{prefix}
