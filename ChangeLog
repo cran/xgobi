@@ -1,3 +1,10 @@
+Sat Feb 12 17:47:06 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-7.
+
+	* R/xgobi.R: Fix bug reported by Hans Ehrbar and unfixed in the
+	improved version.
+
 Sun Jan 30 17:02:29 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 1.1-6.

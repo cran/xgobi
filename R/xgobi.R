@@ -73,7 +73,10 @@ xgobi <- function(matrx,
         if (!is.matrix(lines) || !is.numeric(lines) || dim(lines)[2] != 2)
             stop("The 'lines' argument must be a numeric 2-column matrix")
         linesfile <- paste(dfile, ".lines", sep = "")
-        unix(paste("rm -f", linesfile), output = FALSE)
+        ##<KH>
+        ## unix(paste("rm -f", linesfile), output = FALSE)
+        system(paste("rm -f", linesfile), FALSE)
+        ##</KH>
         if (nrow(lines) > 0) {
             for (i in 1:nrow(lines))
                 cat(lines[i, ], "\n", file = linesfile, append = TRUE)
