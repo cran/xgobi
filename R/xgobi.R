@@ -3,7 +3,13 @@
 ## [these are ok for the "Dec. 1999" version of xgobi]:
 xgobi.colors.default <-
   c("DeepPink", "OrangeRed1", "DarkOrange", "Gold", "Yellow",
-    "DeepSkyBlue1", "SlateBlue1", "YellowGreen", "MediumSpringGreen", "MediumOrchid")
+    "DeepSkyBlue1", "SlateBlue1", "YellowGreen",
+    "MediumSpringGreen", "MediumOrchid")
+
+if(!exists("Sys.sleep", mode = "function")) {
+    warning("\n*** Your R version is outdated.\n*** Consider upgrading!!\n")
+    Sys.sleep <- function(time) system(paste("sleep",time))
+}
 
 xgobi <-
 function(matrx,
@@ -48,8 +54,7 @@ function(matrx,
 	    stop("The `collab' argument needs to be a character vector")
 	if (!missing(collab) && length(collab) != NCOL(x))
 	    stop("`collab' has wrong length (not matching NCOL(x))")
-        cat(collab, file = (colfile <- paste(dfile, ".col", sep="")), sep=
-"\n")
+        cat(collab, file = (colfile <- paste(dfile, ".col", sep="")), sep="\n")
         if(!keep) on.exit(unlink(colfile), add = TRUE)
     }
     ## Row / Case labels ###
@@ -96,7 +101,7 @@ function(matrx,
 	if (!is.matrix(lines) || !is.numeric(lines) || dim(lines)[2] != 2)
 	    stop("The `lines' argument must be a numeric 2-column matrix")
 	linesfile <- paste(dfile, ".lines", sep = "")
-	system(paste("rm -f", linesfile), FALSE)
+	unlink(linesfile)# in case it existed
 	if (nrow(lines) > 0) {
 	    for (i in 1:nrow(lines))
 		cat(lines[i, ], "\n", file = linesfile, append = TRUE)
@@ -159,6 +164,6 @@ function(matrx,
     s <- system(command, FALSE)
 
     ## Now wait a bit before unlinking all the files via  on.exit(.) :
-    if(!keep) system("sleep 3")
+    if(!keep) Sys.sleep(3)
     invisible(s)
 }

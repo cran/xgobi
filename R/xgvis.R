@@ -143,7 +143,7 @@ function(dmat	= NULL,
   s <- system(command, FALSE)
 
   ## Now wait a bit before unlinking all the files via on.exit(.) :
-  if(!keep) system("sleep 3")
+  if(!keep) Sys.sleep(3)
   invisible(s)
 }
 

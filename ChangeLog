@@ -1,7 +1,20 @@
+2001-06-18  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* README: New file instead of an "Depends:" line in
+	* DESCRIPTION (Version): 1.2-4
+
+2001-01-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/xgobi.R: eliminate system; use unlink,
+	 use Sys.sleep(*) instead of system("sleep..")
+	* R/xgvis.R: Sys.sleep() as above
+	
+
 2001-01-05  Martin Maechler  <maechler@stat.math.ethz.ch>
 
         * DESCRIPTION (Version): 1.2-3;  Maintainer
 
+	* INDEX: slightly improved
 	* man/reggeom.Rd: fixed syntax typo (undoc);  
 	* man/xgobi.Rd: (similarly)
 
