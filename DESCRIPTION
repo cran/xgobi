@@ -1,7 +1,8 @@
 Package: xgobi
-Version: 1.1-7
+Version: 1.1-8
 Author: Packaged for R by Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>,
-  based on the S code in the XGobi distribution.
+  with major improvements by M Maechler <maechler@stat.math.ethz.ch>.
+  Based on the S code in the XGobi distribution.
 Description: Interface to the XGobi and XGvis programs for graphical
   data analysis.
 Title: Interface to the XGobi and XGvis programs for graphical data

@@ -1,7 +1,6 @@
 \name{xgvis}
 \alias{xgvis}
-\title{
-xgvis: interactive multidimensional scaling using xgobi for display
+\title{XGvis: interactive multidimensional scaling using xgobi for display
 }
 \description{
 an interactive multidimensional scaling (MDS) program that
@@ -14,36 +13,36 @@ dimensions, 3D being the default.  It permits missing values,
 which can be used to implement multidimensional unfolding.
 }
 \usage{
-xgvis(matrx,
-edges=NULL, pos=NULL, rowlab=NULL, colors=NULL, glyphs=NULL,
-erase=NULL, lines=NULL, linecolors=NULL, resources=NULL,
-display=NULL)
+xgvis(dmat = NULL,
+      edges= NULL,
+      pos  = NULL,
+      rowlab = dimnames(dmat)[[1]],
+      colors = NULL, glyphs = NULL,
+      erase = NULL, lines = NULL, linecolors = NULL,
+      resources = NULL, display = NULL)
 }
 \arguments{
-\item{matrx}{
-An nxn distance matrix
-}
-\item{edges}{
-Line segments: specifications for the pattern of line segments which
-connect pairs of points.  The file must contain at least two numbers per
-line.  The first two numbers represent the row numbers of the two
-points that should be connected.  (This is exactly like the structure
-of a fname.lines file in xgobi.)  In addition, if a third number is
-present, it is taken to be an edge weight.
-If this line is present and the distance matrix is absent, then
-the distance matrix is computed from it, with each
-edge representing a distance of one.
+\item{dmat}{numeric n x n distance matrix.}
+\item{edges}{n x 2 or n x 3 matrix of
+  specifications for the pattern of line segments which
+  connect pairs of points.  Must contain at least two numbers per
+  line.  The first two numbers represent the row numbers of the two
+  points that should be connected.  (This is exactly like the structure
+  of a the \code{lines} argument of \code{\link{xgobi}}.)  In addition,
+  if a third number is present, it is taken to be an edge weight.
+
+  If \code{edges} is specified and \code{dmat} not, then
+  the distance matrix is computed from \code{edges}, with each
+  edge representing a distance of one.
 }
 \item{pos}{
-Starting positions:  an n x p matrix, with entries separated by
-white space and one row per line. 
-If this file is present and a
-distance file is absent, the distance matrix is computed from it.
+  Starting positions: an n x p matrix.
+  If \code{pos} is specified and \code{dmat} not,
+  the distance matrix is computed from \code{pos}.
 }
 \item{rowlab}{
-Optional character vector of row labels; the default is
-\code{dimnames(matrx)[[1]]}.  If no default exists, xgobi constructs its own
-defaults.
+  character vector of \code{n} row labels (defaulting to those od \code{dmat});
+  If no default exists, \code{\link{xgobi}} constructs its own.
 }
 \item{colors}{
 Optional character vector, used to supply initial point colors to be used;
@@ -55,43 +54,45 @@ startup; the default is that all points are drawn with the same glyph.
 }
 \item{erase}{
 Optional integer vector of length equal to the number of rows in the
-data and composed of 1s and 0s.  A 1 in position i specifies that 
+data and composed of 1s and 0s.  A 1 in position i specifies that
 point i should be erased.  The default is a vector of 0s.
 }
 \item{lines}{
 Optional integer matrix, n by 2, which specifies by row number
 pairs of points to be connected by line segments.
-If this file is present, then the edges
-file is used to create the distance matrix but the lines file is
-used to draw the edges.
+If \code{lines} are specified, then the \code{edges} is used to create
+the distance matrix but \code{lines} is used to draw the edges.
 }
 \item{linecolors}{
 Optional integer vector, of length n where n is the number of
-lines specified by the 'lines' argument.  It is used to supply
+lines specified by the \code{lines} argument.  It is used to supply
 line colors to be used on startup; the default is for all the
 lines to be drawn in the standard foreground color.
 }
 \item{resources}{
-Optional character vector created by clicking on the "Save
-Resources" button in XGobi (if this XGvis was initiated during
-an S session).
+  Optional character vector created by clicking on the "Save
+  Resources" button in XGobi.
+%(if this XGvis was initiated during an S session).
 }
 \item{display}{
-Optional character string, identifying the monitor on which to display
-the xgvis window.  The default is \code{"machine:0.0"} where \code{machine} is the
-name of the user's workstation.  See documentation for X.
-}}
+  Optional character string, identifying the monitor on which to display
+  the xgvis window.  The default is \code{"machine:0.0"} where
+  \code{machine} is the name of the user's workstation.  See
+  documentation for X.
+}
+}
 \value{
 The UNIX \code{status} upon completion, i.e. \code{0} if ok.
 }
 \section{Side Effects}{
-The xgvis S function executes a call to the C program of the same name,
-and returns control of the S shell to the user.
+The xgvis \R function executes a call to the C program of the same name,
+and returns control of the \R ``shell'' to the user.
 }
 \references{
   \url{http://www.research.att.com/areas/stat/xgobi/}, \cr
   \url{http://www.public.iastate.edu/~dicook/}
 }
+%\author{
 \section{CONTACT}{
   D. F. Swayne \email{dfs@research.att.com}
 }
@@ -100,8 +101,8 @@ and returns control of the S shell to the user.
 ## directory in the xgobi and xgvis distribution directory.
 
 data(morsecodes)
-xgvis(dmat = morsecodes.dist, 
-      pos = morsecodes.pos, 
+xgvis(dmat = morsecodes.dist,
+      pos = morsecodes.pos,
       row = morsecodes.row,
       colors = morsecodes.colors,
       glyphs = morsecodes.glyphs,
@@ -109,4 +110,5 @@ xgvis(dmat = morsecodes.dist,
       linecolors = morsecodes.linecolors)
 }
 \keyword{dynamic}
+\keyword{multivariate}
 % Converted by Sd2Rd version 0.3-3.

@@ -1,3 +1,16 @@
+Sat Mar 11 23:41:45 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-8.
+
+	* R/xgobi.R: reactive `dev' argument with default 2, as suggested
+	by Hans Ehrbar <ehrbar@econ.utah.edu>.
+
+Mon Mar  6 2000  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/xgobi.R: rowlab & collab fixes & checks.
+	* R/xgvis.R: stop() & warning()	instead of cat(); rowlab default.
+	* man/xgvis.Rd & man/xgobi.Rd: cleanup, particularly xgvis.
+
 Sat Feb 12 17:47:06 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 1.1-7.
@@ -9,7 +22,8 @@ Sun Jan 30 17:02:29 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* DESCRIPTION (Version): New version is 1.1-6.
 
-	* R/xgobi: Replace by improved version by MM.
+	* R/xgobi: Replace by improved version by MM: stop() & warning()
+	instead of cat().
 
 Sun Jan 23 16:19:56 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
@@ -17,7 +31,7 @@ Sun Jan 23 16:19:56 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 
 	* R/xgobi.R: Sync with the version in xgobi 1999/Nov.  Fix bug
 	reported by Hans Ehrbar <ehrbar@econ.utah.edu>.
-	
+
 	* R/xgvis.R: Sync with the version in xgobi 1999/Nov.
 
 Tue Jan  4 11:25:32 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
@@ -25,7 +39,7 @@ Tue Jan  4 11:25:32 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
 	* DESCRIPTION (Version): New version is 1.1-4.
 
 	* man/morsecodes.Rd: Fix Rd syntax problem.
-	
+
 	* man/xgobi.Rd: Mark up URLs and email addresses.
 	* man/xgvis.Rd: Mark up URLs and email addresses.
 
