@@ -6,11 +6,6 @@ xgobi.colors.default <-
     "DeepSkyBlue1", "SlateBlue1", "YellowGreen",
     "MediumSpringGreen", "MediumOrchid")
 
-if(!exists("Sys.sleep", mode = "function")) {
-    warning("\n*** Your R version is outdated.\n*** Consider upgrading!!\n")
-    Sys.sleep <- function(time) system(paste("sleep",time))
-}
-
 xgobi <-
 function(matrx,
 	 collab = dimnames(matrx)[[2]],
