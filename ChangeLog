@@ -1,11 +1,14 @@
-Sat Mar 11 23:41:45 2000  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+2000-04-12  Martin Maechler  <maechler@stat.math.ethz.ch>
 
-	* DESCRIPTION (Version): New version is 1.1-8.
+	* DESCRIPTION (Version): New version is 1.1-9; ...
 
-	* R/xgobi.R: reactive `dev' argument with default 2, as suggested
-	by Hans Ehrbar <ehrbar@econ.utah.edu>.
+	* R/xgobi.R: no "-dev" (!)
+	* R/xgvis.R: fix row/case labels; run in background
+	* man/morsecodes.Rd: added missing morsecode.col + example + *.raw
+	* man/xgvis.Rd: Add comments etc for example
+	* data/morsecodes.R: added morsecodes.raw; using int
 
-Mon Mar  6 2000  Martin Maechler  <maechler@stat.math.ethz.ch>
+2000-03-06  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/xgobi.R: rowlab & collab fixes & checks.
 	* R/xgvis.R: stop() & warning()	instead of cat(); rowlab default.

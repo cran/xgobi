@@ -1,16 +1,15 @@
-
 xgvis <-
-  function(dmat       = NULL,
-           edges      = NULL,
-           pos        = NULL,
-           rowlab     = dimnames(dmat)[[1]],
-           colors     = NULL,
-           glyphs     = NULL,
-           erase      = NULL,
-           lines      = NULL,
-           linecolors = NULL,
-           resources  = NULL,
-           display    = NULL)
+function(dmat       = NULL,
+         edges      = NULL,
+         pos        = NULL,
+         rowlab     = dimnames(dmat)[[1]],
+         colors     = NULL,
+         glyphs     = NULL,
+         erase      = NULL,
+         lines      = NULL,
+         linecolors = NULL,
+         resources  = NULL,
+         display    = NULL)
 {
   if (is.null(edges) && is.null(pos) && is.null(dmat))
     stop("One of dmat, edges, or pos must be present")
@@ -37,7 +36,7 @@ xgvis <-
   ## Edges ###
   if (!is.null(edges)) { # check data type
     if (!is.matrix(edges) || !is.numeric(edges) || dim(edges)[2] != 2)
-      stop("The 'edges' argument must be a numeric 2-column matrix")
+      stop("The `edges' argument must be a numeric 2-column matrix")
 
     edgesfile <- paste(basefile, ".edges", sep="")
     if (nrow(edges) > 0) {
@@ -58,15 +57,13 @@ xgvis <-
     on.exit(unlink(pfile), add = TRUE)
   }
 
-  ## Row labels ###
-  if (is.null(rowlab) && !is.null(dmat))
-
+  ## Row / Case labels ###
   if (!is.null(rowlab)) {
       if (!is.vector(rowlab) || !is.character(rowlab))# check data type
-          stop("The 'rowlab' argument needs to be a character vector")
-      ## if(length(rowlab)) !=
-      rowfile <- paste(basefile, ".row", sep="")
-      write(rowlab, file = rowfile, ncol=1)
+          stop("The `rowlab' argument needs to be a character vector")
+      if (!missing(rowlab) && length(rowlab) != NROW(dmat))
+          stop("`rowlab' has wrong length (not matching NROW(dmat))")
+      cat(rowlab, file = (rowfile <- paste(basefile, ".row", sep="")), sep="\n")
       on.exit(unlink(rowfile), add = TRUE)
   }
 
@@ -74,7 +71,7 @@ xgvis <-
   if (!is.null(colors)) {
     # check data type
     if (!is.vector(colors) || !is.character(colors))
-      stop("The 'colors' argument needs to be a character vector")
+      stop("The `colors' argument needs to be a character vector")
 
     colorfile <- paste(basefile, ".colors", sep="")
     write(colors, file = colorfile, ncol=1)
@@ -85,7 +82,7 @@ xgvis <-
   if (!is.null(glyphs)) {
     # check data type
     if (!is.vector(glyphs) || !is.numeric(glyphs))
-      stop("The 'glyphs' argument needs to be a numeric vector")
+      stop("The `glyphs' argument needs to be a numeric vector")
 
     glyphfile <- paste(basefile, ".glyphs", sep="")
     write(glyphs, file = glyphfile, ncol=1)
@@ -96,7 +93,7 @@ xgvis <-
   if (!is.null(erase)) {
     # check data type
     if (!is.vector(erase) || !is.numeric(erase))
-      stop("The 'erase' argument needs to be a numeric vector")
+      stop("The `erase' argument needs to be a numeric vector")
 
     erasefile <- paste(basefile, ".erase", sep="")
     write(erase, file = erasefile, ncol=1)
@@ -107,7 +104,7 @@ xgvis <-
   if (!is.null(lines)) {
     # check data type
     if (!is.matrix(lines) || !is.numeric(lines) || dim(lines)[2] != 2)
-      stop("The 'lines' argument must be a numeric 2-column matrix")
+      stop("The `lines' argument must be a numeric 2-column matrix")
 
     linesfile <- paste(basefile, ".lines", sep="")
     if (nrow(lines) > 0) {
@@ -120,7 +117,7 @@ xgvis <-
   if ((!is.null(lines) || !is.null(edges)) && !is.null(linecolors)) {
     # check data type
     if (!is.vector(linecolors) || !is.character(linecolors))
-      stop("The 'linecolors' argument must be a character vector")
+      stop("The `linecolors' argument must be a character vector")
 
     linecolorfile <- paste(basefile, ".linecolors", sep="")
     write(linecolors, file = linecolorfile, ncol=1)
@@ -131,33 +128,35 @@ xgvis <-
   if (!is.null(resources)) {
     # check data type
     if (!is.vector(resources) || !is.character(resources))
-      stop("The 'resources' argument must be a character vector")
+      stop("The `resources' argument must be a character vector")
 
     resourcefile <- paste(basefile, ".resources", sep="")
     write(resources, file = resourcefile, ncol=1)
     on.exit(unlink(resourcefile), add = TRUE)
   }
 
+## DEBUGGING: Keep all the tempfiles by
+  on.exit()
 
-  ## Note to installer:
-  ## Here you need to specify the path to the xgvis batch file/ executable
-  ## on your system.
-  #
+### Note to installer:
+### Here you need to specify the path to the xgvis executable / batch file
+### on your system.
+
   ## dos example:
   ##  xgpath <- "c:/packages/xgobi/xgvis.bat"
   ## unix example:
   ##<KH>
   ## xgpath <- "/usr/dfs/xgobi/joint/src/xgvis"
   ## command <- paste(xgpath, basefile)
-  command <- paste("xgvis", basefile)
+  command <- paste("xgvis", basefile, "&")
   ##</KH>
   cat(command, "\n")
   ## dos:
-  ## invisible(dos(command, multi = F, minimized = T, output.to.S = F, translate = T))
+  ## invisible(dos(command, multi= F, minimized=T, output.to.S=F, translate=T))
   ## unix:
   ##<KH>
   ## invisible(unix(command))
-  invisible(system(command))
+  invisible(system(command, FALSE))
   ##</KH>
 }
 
