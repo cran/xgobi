@@ -48,12 +48,10 @@ xgvis(dmat = NULL,
     to be used; see \code{\link{xgobi}}.}
   \item{glyphs}{integer vector, used to supply glyphs to be used on
     startup, see \code{\link{xgobi}}.}
-  }
   \item{erase}{
     Optional integer vector of length equal to the number of rows in the
     data and composed of 1s and 0s.  A 1 in position i specifies that
-    point i should be erased.  The default is a vector of 0s.
-  }
+    point i should be erased.  The default is a vector of 0s.}
   \item{lines}{
     Optional integer matrix, n by 2, which specifies by row number
     pairs of points to be connected by line segments.
