@@ -1,0 +1,43 @@
+Sat Apr 10 16:32:51 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-1.
+
+	* R/xgvis.R: R currently does not have `on.exit(EXPR, ADD)'.  Work
+	around this by building up the list of files to be unlinked and
+	changing all on.exit() statements to `on.exit(unlink(FILES))'.
+
+	* man/xgobi.Rd: Fix keyword.  Make example executable.
+	* man/xgvis.Rd: Fix keyword.  Make example executable.
+
+	* data/laser.tab: New file.
+	* data/morsecodes.R: New file.
+	* data/perm4.R: New file.
+
+Sun Mar 28 10:47:24 1999  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.1-0.
+
+	* INDEX: Added xgvis.
+
+	* R/xgvis.R: New file.
+
+	* man/xgobi.Rd: Updated for XGobi version 1999.03.
+	* man/xgvis.Rd: New file.
+
+Tue Nov  3 09:00:12 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION (Version): New version is 1.0-4.
+
+	* man/xgobi.Rd: Converted and manually reformatted from the
+	`Sfunction.d' file in the most current version of xgobi (March,
+	1998).
+
+	* R/xgobi.R: Now based on the March 1998 version of `Sfunction'.
+	As R does not use permanent storage, S specific features are no
+	longer used for starting up the inferior Xgobi process.
+
+Sun Feb 22 09:41:30 1998  Kurt Hornik  <Kurt.Hornik@ci.tuwien.ac.at>
+
+	* DESCRIPTION:  New file.
+
+	* ChangeLog:  Finally started, current version is 1.0-3.
