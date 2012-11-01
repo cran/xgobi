@@ -1,3 +1,11 @@
+2012-11-01  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.2-15
+	* NAMESPACE: added, as required.
+
+	* R/quadplot.R (quadplot): partial arg.match "warning"
+	* R/xgvis.R (xgvis): ditto
+
 2009-02-16  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version, License): 1.2-14; mv'ed COPYING to LICENSE

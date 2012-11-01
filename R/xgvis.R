@@ -42,7 +42,7 @@ function(dmat	= NULL,
 
         edgesfile <- paste(basefile, ".edges", sep="")
         if (nrow(edges) > 0) {
-            write(t(edges), file = edgesfile, ncol=2)
+            write(t(edges), file = edgesfile, ncolumns=2)
         }
         tmpfiles <- c(tmpfiles, edgesfile)
     }
@@ -76,7 +76,7 @@ function(dmat	= NULL,
             stop("The `colors' argument needs to be a character vector")
 
         colorfile <- paste(basefile, ".colors", sep="")
-        write(colors, file = colorfile, ncol=1)
+        write(colors, file = colorfile, ncolumns=1)
         tmpfiles <- c(tmpfiles, colorfile)
     }
 
@@ -87,7 +87,7 @@ function(dmat	= NULL,
             stop("The `glyphs' argument needs to be a numeric vector")
 
         glyphfile <- paste(basefile, ".glyphs", sep="")
-        write(glyphs, file = glyphfile, ncol=1)
+        write(glyphs, file = glyphfile, ncolumns=1)
         tmpfiles <- c(tmpfiles, glyphfile)
     }
 
@@ -98,7 +98,7 @@ function(dmat	= NULL,
             stop("The `erase' argument needs to be a numeric vector")
 
         erasefile <- paste(basefile, ".erase", sep="")
-        write(erase, file = erasefile, ncol=1)
+        write(erase, file = erasefile, ncolumns=1)
         tmpfiles <- c(tmpfiles, erasefile)
     }
 
@@ -110,7 +110,7 @@ function(dmat	= NULL,
 
         linesfile <- paste(basefile, ".lines", sep="")
         if (nrow(lines) > 0) {
-            write(t(lines), file = linesfile, ncol=2)
+            write(t(lines), file = linesfile, ncolumns=2)
             tmpfiles <- c(tmpfiles, linesfile)
         }
     }
@@ -122,7 +122,7 @@ function(dmat	= NULL,
             stop("The `linecolors' argument must be a character vector")
 
         linecolorfile <- paste(basefile, ".linecolors", sep="")
-        write(linecolors, file = linecolorfile, ncol=1)
+        write(linecolors, file = linecolorfile, ncolumns=1)
         tmpfiles <- c(tmpfiles, linecolorfile)
     }
 
@@ -133,7 +133,7 @@ function(dmat	= NULL,
             stop("The `resources' argument must be a character vector")
 
         resourcefile <- paste(basefile, ".resources", sep="")
-        write(resources, file = resourcefile, ncol=1)
+        write(resources, file = resourcefile, ncolumns=1)
         tmpfiles <- c(tmpfiles, resourcefile)
     }
 

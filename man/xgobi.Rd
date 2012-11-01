@@ -157,7 +157,7 @@ data(laser)
 xgobi(laser)
 
 Xdir <- file.path(dirname(tempfile()), "xgobi")
-\testonly{if(file.exists(Xdir)) unlink(Xdir, recursive = TRUE)}
+\dontshow{if(file.exists(Xdir)) unlink(Xdir, recursive = TRUE)}
 dir.create(Xdir)
 xgobi(laser, colors = xgobi.colors.default[c(1,3,5,7,9,10)[as.factor(laser$ Ir)]],
       glyphs = c(23,8)[1+(laser$lambda > 1576)],

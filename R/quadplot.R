@@ -25,6 +25,6 @@ quadplot <-
 
     if(is.null(pointlabs)) pointlabs <- as.character(1:n)
     xgobi(mat3, lines = tetralines, rowlab = c(vertexlabs, pointlabs),
-          resource=c("*showLines: True", "*showAxes: False"))
+	  resources = c("*showLines: True", "*showAxes: False"))
     invisible(mat3) # or invisible()
 }
